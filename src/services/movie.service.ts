@@ -4,7 +4,7 @@ import { TPaginationResult } from '@/common/types/pagination.types';
 
 class MovieService {
   private BASE_URL = 'movie';
-  private API_KEY = process.env.API_KEY;
+  private API_KEY = '5694325f102bda4c1b80a82da9f616ea';
 
   async search(name: string, page: number): Promise<TPaginationResult<IMovie>> {
     const movies = await api.get(
@@ -13,6 +13,12 @@ class MovieService {
     return movies.data;
   }
 
+  async getById(movieId: string): Promise<IMovie> {
+    const movie = await api.get(
+      `${this.BASE_URL}/${movieId}?api_key=${this.API_KEY}&language=pt-BR`
+    );
+    return movie.data;
+  }
   async getSimilarMovies(
     movieId: string,
     page: number
